@@ -22,5 +22,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   )
 
+  // É preciso utilizar essa sintaxe de function neste caso
+  User.prototype.checkPassword = function (password) {
+    return bcrypt.compare(password, this.password_hash)
+  }
+
   return User
 }
