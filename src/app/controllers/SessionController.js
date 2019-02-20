@@ -12,17 +12,26 @@ class SessionController {
 
     if (!user) {
       console.log('Usuario nao encontrado')
+      req.flash('error', 'Usuario nao encontrado')
       return res.redirect('/')
     }
 
     if (!(await user.checkPassword(password))) {
       console.log('Senha incorreta')
+      req.flash('Senha incorreta')
       return res.redirect('/')
     }
 
     req.session.user = user
 
     return res.redirect('/app/dashboard')
+  }
+
+  destroy (req, res) {
+    req.session.destroy(() => {
+      res.clearCookie('root')
+      return res.redirect('/')
+    })
   }
 }
 
