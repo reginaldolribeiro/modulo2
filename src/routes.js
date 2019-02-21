@@ -10,6 +10,9 @@ const guestMiddleware = require('./app/middlewares/guest')
 const UserControler = require('./app/controllers/UserController')
 const SessionController = require('./app/controllers/SessionController')
 const DashboardController = require('./app/controllers/DashboardController')
+const FileController = require('./app/controllers/FileController')
+
+routes.get('/files/:file', FileController.show)
 
 routes.use((req, res, next) => {
   res.locals.flashSuccess = req.flash('success')
