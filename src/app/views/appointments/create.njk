@@ -14,8 +14,7 @@
     <form action="/app/appointments/new/{{ provider.id }}" method="post">
       <input type="text" class="flatpickr" placeholder="Escolha uma data" />
 
-      <div id="hours">
-      </div>
+      <div id="hours"></div>
 
       <button type="submit">Agendar</button>
 
@@ -30,7 +29,7 @@
       onChange: function(date) {
         fetch(`/app/available/{{ provider.id }}?date=${date[0].getTime()}`).then(function(response) {
           response.text().then(function (html) {
-            document.getElementById('hours').innerHtml = html
+            document.getElementById('hours').innerHTML = html
           })
         })
       }
