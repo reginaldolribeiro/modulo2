@@ -1,4 +1,4 @@
-const moment = require('moment')
+const moment = require('moment-timezone')
 const { Appointment } = require('../models')
 const { Op } = require('sequelize')
 
@@ -39,15 +39,17 @@ class AvailableController {
         .minute(minute)
         .second(0) // 2018-11-20 08:00:00
 
+      // console.log(date)
+
       return {
         time,
         value: value.format(),
         available:
           value.isAfter(moment()) &&
-          !appointments.find(a => moment(a.date).format('HH:mm') === time)
+          !appointments.find(a => moment(a.date).format('HH:mm') == time)
       }
     })
-    // console.log(available)
+    console.log(available)
 
     return res.render('available/index', { available })
   }
